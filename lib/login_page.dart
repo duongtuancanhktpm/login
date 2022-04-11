@@ -22,8 +22,22 @@ class LoginPage extends StatelessWidget {
         body: BlocProvider<LoginBloc>(
           create: (context) =>
               LoginBloc(new LoginState(username: "", password: "", stt: "")),
-          child: _loginView(),
+          child: _loginViewListener(),
         ));
+  }
+
+  Widget _loginViewListener() {
+    return BlocListener<LoginBloc, LoginState>(
+      listener: (_context, state) {
+        if (state is LoginSucces) {
+          Navigator.push(
+              _context,
+              MaterialPageRoute(
+                  builder: (context) => MyHomePage(title: "Home page")));
+        }
+      },
+      child: _loginView(),
+    );
   }
 
   Widget _loginView() {
@@ -89,14 +103,8 @@ class LoginPage extends StatelessWidget {
       ),
       child: TextButton(
         child: Text("LOGIN"),
-        onPressed: () {
+        onPressed: () async {
           _bloc.add(LoginRequest());
-          if (_state.loginSuccess == true) {
-            Navigator.push(
-                _context,
-                MaterialPageRoute(
-                    builder: (context) => MyHomePage(title: "Home page")));
-          }
         },
       ),
     );

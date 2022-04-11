@@ -11,3 +11,11 @@ class LoginState {
   LoginState coppy() =>
       LoginState(username: username, password: password, stt: stt);
 }
+
+class LoginSucces extends LoginState {
+  LoginSucces(LoginState loginState)
+      : super(
+            username: loginState.username,
+            password: loginState.password,
+            stt: loginState.stt);
+}

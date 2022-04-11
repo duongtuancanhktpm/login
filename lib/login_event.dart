@@ -1,6 +1,6 @@
 class LoginEvent {}
 
-class UsernameChangeEvent extends LoginEvent {
+class UsernameChangeEvent implements LoginEvent {
   String username;
 
   UsernameChangeEvent({required this.username}) {}
